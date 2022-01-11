@@ -5,14 +5,14 @@ spring:
         - id: userProfilesPrincipal
           uri: http://profiles
           predicates:
-            - Path=/api/v1/profiles/me, /api/v1/profiles/me/pets
+            - Path=/api/v1/profiles/me
             - Method=GET,POST,PATCH,DELETE
           filters:
             - AddPrincipalToPathFilter
         - id: petprofiles
           uri: http://profiles
           predicates:
-            - Path=/api/v1/pets, /api/v1/pets/**, /api/v1/petprofiles/**, /api/v1/profiles/**
+            - Path=/api/v1/profiles/**, /api/v1/description/**
         - id: questionnaire
           uri: http://questionnaire
           predicates:
