@@ -26,7 +26,7 @@ management:
     web:
       exposure:
         include: '*'
-springdoc.api-docs.path: /api/v1/ats-profiles/api-doc
+springdoc.api-docs.path: /api/v1/profiles/api-doc
 logging:
   level:
     com.agenatech: DEBUG

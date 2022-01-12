@@ -32,7 +32,7 @@ spring:
             - Method=GET,PUT,POST,PATCH,DELETE
           filters:
             - AddPrincipalToPathFilter
-        - id: petprofiles
+        - id: profiles
           uri: http://localhost:8095
           predicates:
             - Path=/api/v1/pets, /api/v1/pets/**, /api/v1/petprofiles/**, /api/v1/profiles/**
