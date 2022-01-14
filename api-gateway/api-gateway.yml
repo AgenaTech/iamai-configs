@@ -82,6 +82,7 @@ management:
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
     reactor.netty.http.client: DEBUG
 springdoc:
   packagesToScan: com.agenatech
