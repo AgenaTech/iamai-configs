@@ -8,6 +8,10 @@ security-constraints:
     - /webjars/swagger-ui/**
     - /swagger-ui**
     - /v3/api-docs/**
+  admin-uri:
+    - /api/v1/profiles/search/**
+  admin-roles:
+    - iamai-admin
 spring:
   cloud:
     gateway:
