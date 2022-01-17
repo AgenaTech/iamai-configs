@@ -14,7 +14,7 @@ spring:
           predicates:
             - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc
         - id: adminSearch
-          uri: http://localhost:8080
+          uri: http://profiles
           predicates:
             - Path=/api/v1/profiles/search/**
           metadata:
