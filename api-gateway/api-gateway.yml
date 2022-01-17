@@ -45,7 +45,9 @@ spring:
           predicates:
             - Path=/api/v1/profiles/search/**
           metadata:
-            auth-roles: iamai-admin, test-polka
+            auth-roles:
+            - iamai-admin
+            - test-polka
         - id: multimedia
           uri: http://localhost:8097
           predicates:
