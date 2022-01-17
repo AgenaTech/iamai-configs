@@ -43,7 +43,7 @@ spring:
         - id: adminSearch
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles/search/**, /api/v1/testme/test/**
           metadata:
             auth-roles:
             - iamai-admin
