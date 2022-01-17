@@ -39,7 +39,8 @@ spring:
         - id: profiles
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc
+#            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc
+             - Path=/api/v1/description/**, /api/v1/profiles/api-doc
         - id: adminSearch
           uri: http://localhost:8080
           predicates:
