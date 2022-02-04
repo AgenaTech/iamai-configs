@@ -48,7 +48,7 @@ spring:
         - id: PublicSearch
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles/search/*?projection=admin-search-profile
             - Query=projection, public-search-profile
         - id: multimedia
           uri: http://localhost:8097
