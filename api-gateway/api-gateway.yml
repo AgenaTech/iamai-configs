@@ -68,7 +68,7 @@ spring:
             auth-roles:
               - iamai-admin
           filters:
-            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles/search//$\{path}?projection=admin-search-profile
+            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles/search//$\{path}&projection=admin-search-profile
   security:
     oauth2:
       client:
