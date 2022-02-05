@@ -36,15 +36,15 @@ spring:
           uri: http://localhost:8080
           predicates:
             - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc
-        - id: adminSearch
-          uri: http://localhost:8080
-          predicates:
-#            - Path=/api/v1/profiles/search/**, /api/v1/testme/test/**
-            - Query=projection, admin-search-profile
-          metadata:
-            auth-roles:
-            - iamai-admin
-            - test-polka
+#        - id: adminSearch
+#          uri: http://localhost:8080
+#          predicates:
+#            - Path=/api/v1/profiles/admin/search/**, /api/v1/testme/test/**
+#            - Query=projection, admin-search-profile
+#          metadata:
+#            auth-roles:
+#            - iamai-admin
+#            - test-polka
         - id: PublicSearch
           uri: http://localhost:8080
           predicates:
@@ -60,6 +60,15 @@ spring:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /api/v1//$\{path}/api-doc
+        - id: adminSearch2
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/profiles/admin/search/**
+          metadata:
+            auth-roles:
+              - iamai-admin
+          filters:
+            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles/search//$\{path}?projection=admin-search-profile
   security:
     oauth2:
       client:
