@@ -13,13 +13,18 @@ spring:
           uri: http://profiles
           predicates:
             - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/count/**
-        - id: adminSearch
+        - id: PublicSearch
           uri: http://profiles
           predicates:
             - Path=/api/v1/profiles/search/**
-          metadata:
-            auth-roles:
-              - iamai-admin
+            - Query=projection, public-search-profile
+        - id: AdminSearchDeny
+          uri: no://op
+          predicates:
+            - Path=/api/v1/profiles/search/**
+            - Query=projection, admin-search-profile
+          filters:
+            - SetStatus=403
         - id: multimedia
           uri: http://multimedia-manager
           predicates:
@@ -30,5 +35,15 @@ spring:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /api/v1//$\{path}/api-doc
+        - id: adminSearch
+          uri: http://profiles
+          predicates:
+            - Path=/api/v1/profiles/admin/search/**
+          metadata:
+            auth-roles:
+              - iamai-admin
+          filters:
+            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles/search//$\{path}
+            - AddRequestParameter=projection, admin-search-profile
 keycloak-client:
   server-url: https://auth-dev.agenadev.com/auth

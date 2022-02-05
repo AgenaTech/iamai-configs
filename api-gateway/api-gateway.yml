@@ -44,16 +44,6 @@ spring:
             - Query=projection, admin-search-profile
           filters:
             - SetStatus=403
-#            doesn't work because path roles security override
-#        - id: adminSearch
-#          uri: http://localhost:8080
-#          predicates:
-#            - Path=/api/v1/profiles/search/**
-#            - Query=projection, admin-search-profile
-#          metadata:
-#            auth-roles:
-#              - iamai-admin
-#              - test-polka
         - id: profiles
           uri: http://localhost:8080
           predicates:
