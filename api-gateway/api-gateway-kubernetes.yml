@@ -9,10 +9,6 @@ spring:
             - Method=GET,PUT,PATCH,DELETE
           filters:
             - AddPrincipalToPathFilter
-        - id: profiles
-          uri: http://profiles
-          predicates:
-            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/count/**
         - id: PublicSearch
           uri: http://profiles
           predicates:
@@ -31,6 +27,10 @@ spring:
             - Path=/api/v1/profiles/search/**
           filters:
             - SetStatus=403
+        - id: profiles
+          uri: http://profiles
+          predicates:
+            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/count/**
         - id: multimedia
           uri: http://multimedia-manager
           predicates:
