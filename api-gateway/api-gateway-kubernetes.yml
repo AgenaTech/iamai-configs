@@ -14,13 +14,6 @@ spring:
           predicates:
             - Path=/api/v1/profiles/search/**
             - Query=projection, public-search-profile
-        - id: AdminSearchDeny
-          uri: no://op
-          predicates:
-            - Path=/api/v1/profiles/search/**
-            - Query=projection, admin-search-profile
-          filters:
-            - SetStatus=403
         - id: GeneralSearchDeny
           uri: no://op
           predicates:
