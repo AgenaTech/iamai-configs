@@ -44,6 +44,12 @@ spring:
             - Query=projection, admin-search-profile
           filters:
             - SetStatus=403
+        - id: GeneralSearchDeny
+          uri: no://op
+          predicates:
+            - Path=/api/v1/profiles/search/**
+          filters:
+            - SetStatus=403
         - id: profiles
           uri: http://localhost:8080
           predicates:
