@@ -39,7 +39,7 @@ spring:
         - id: adminSearch
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/search/*?projection=admin-search-profile, /api/v1/testme/test/**
+#            - Path=/api/v1/profiles/search/**, /api/v1/testme/test/**
             - Query=projection, admin-search-profile
           metadata:
             auth-roles:
@@ -48,7 +48,7 @@ spring:
         - id: PublicSearch
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/search/*?projection=public-search-profile
+            - Path=/api/v1/profiles/search/**
             - Query=projection, public-search-profile
         - id: multimedia
           uri: http://localhost:8097
