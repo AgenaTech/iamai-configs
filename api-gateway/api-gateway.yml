@@ -37,6 +37,13 @@ spring:
           predicates:
             - Path=/api/v1/profiles/search/**
             - Query=projection, public-search-profile
+        - id: AdminSearch1
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/profiles/search/**
+            - Query=projection, admin-search-profile
+          filters:
+            - RewritePath=/api/v1/profiles/search/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
         - id: GeneralSearchDeny
           uri: no://op
           predicates:
