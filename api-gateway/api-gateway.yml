@@ -37,15 +37,23 @@ spring:
           predicates:
             - Path=/api/v1/profiles/search/**
             - Query=projection, public-search-profile
-        - id: adminSearch
-          uri: http://localhost:8080
+        - id: AdminSearchDeny
+          uri: no://op
           predicates:
             - Path=/api/v1/profiles/search/**
             - Query=projection, admin-search-profile
-          metadata:
-            auth-roles:
-              - iamai-admin
-              - test-polka
+          filters:
+            - SetStatus=403
+#            doesn't work because path roles security override
+#        - id: adminSearch
+#          uri: http://localhost:8080
+#          predicates:
+#            - Path=/api/v1/profiles/search/**
+#            - Query=projection, admin-search-profile
+#          metadata:
+#            auth-roles:
+#              - iamai-admin
+#              - test-polka
         - id: profiles
           uri: http://localhost:8080
           predicates:
