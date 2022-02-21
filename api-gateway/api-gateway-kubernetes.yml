@@ -12,15 +12,17 @@ spring:
         - id: PublicSearch
           uri: http://profiles
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, public-search-profile
+            - Query=isOpenForWork, true
         - id: AdminSearch
           uri: http://api-gateway
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, admin-search-profile
+            - Query=isOpenForWork, true
           filters:
-            - RewritePath=/api/v1/profiles/search/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
+            - RewritePath=/api/v1/profiles/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
         - id: GeneralSearchDeny
           uri: no://op
           predicates:
@@ -49,6 +51,6 @@ spring:
             auth-roles:
               - iamai-admin
           filters:
-            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles/search//$\{path}
+            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles//$\{path}
 keycloak-client:
   server-url: https://auth-dev.agenadev.com/auth
