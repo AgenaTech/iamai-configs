@@ -35,15 +35,17 @@ spring:
         - id: PublicSearch
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, public-search-profile
+            - Query=isOpenForWork, true
         - id: AdminSearch
           uri: http://localhost:8081
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, admin-search-profile
+            - Query=isOpenForWork, true
           filters:
-            - RewritePath=/api/v1/profiles/search/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
+            - RewritePath=/api/v1/profiles/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
         - id: GeneralSearchDeny
           uri: no://op
           predicates:
