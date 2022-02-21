@@ -35,21 +35,17 @@ spring:
         - id: PublicSearch
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, public-search-profile
+            - Query=isOpenForWork, true
         - id: AdminSearch
           uri: http://localhost:8081
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, admin-search-profile
+            - Query=isOpenForWork, true
           filters:
-            - RewritePath=/api/v1/profiles/search/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
-        - id: GeneralSearchDeny
-          uri: no://op
-          predicates:
-            - Path=/api/v1/profiles/search/**
-          filters:
-            - SetStatus=403
+            - RewritePath=/api/v1/(?<path>.*), /api/v1/admin//$\{path}
         - id: profiles
           uri: http://localhost:8080
           predicates:
@@ -67,12 +63,12 @@ spring:
         - id: adminSearch2
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/admin/search/**
+            - Path=/api/v1/admin/**
           metadata:
             auth-roles:
               - iamai-admin
           filters:
-            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles/search//$\{path}
+            - RewritePath=/api/v1/admin/(?<path>.*), /api/v1//$\{path}
   security:
     oauth2:
       client:

@@ -12,25 +12,21 @@ spring:
         - id: PublicSearch
           uri: http://profiles
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, public-search-profile
+            - Query=isOpenForWork, true
         - id: AdminSearch
           uri: http://api-gateway
           predicates:
-            - Path=/api/v1/profiles/search/**
+            - Path=/api/v1/profiles
             - Query=projection, admin-search-profile
+            - Query=isOpenForWork, true
           filters:
-            - RewritePath=/api/v1/profiles/search/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
-        - id: GeneralSearchDeny
-          uri: no://op
-          predicates:
-            - Path=/api/v1/profiles/search/**
-          filters:
-            - SetStatus=403
+            - RewritePath=/api/v1/(?<path>.*), /api/v1/admin//$\{path}
         - id: profiles
           uri: http://profiles
           predicates:
-            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/count/**
+            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc
         - id: multimedia
           uri: http://multimedia-manager
           predicates:
@@ -44,11 +40,11 @@ spring:
         - id: adminSearchDownstream
           uri: http://profiles
           predicates:
-            - Path=/api/v1/profiles/admin/search/**
+            - Path=/api/v1/admin/**
           metadata:
             auth-roles:
               - iamai-admin
           filters:
-            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles/search//$\{path}
+            - RewritePath=/api/v1/admin/(?<path>.*), /api/v1//$\{path}
 keycloak-client:
   server-url: https://auth-dev.agenadev.com/auth
