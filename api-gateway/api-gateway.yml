@@ -45,7 +45,7 @@ spring:
             - Query=projection, admin-search-profile
             - Query=isOpenForWork, true
           filters:
-            - RewritePath=/api/v1/profiles/(?<path>.*), /api/v1/profiles/admin/search//$\{path}
+            - RewritePath=/api/v1/profiles/(?<path>.*), /api/v1/admin/profiles/search//$\{path}
         - id: GeneralSearchDeny
           uri: no://op
           predicates:
@@ -69,12 +69,12 @@ spring:
         - id: adminSearch2
           uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/admin/search/**
+            - Path=/api/v1/admin/profiles/search/**
           metadata:
             auth-roles:
               - iamai-admin
           filters:
-            - RewritePath=/api/v1/profiles/admin/search/(?<path>.*), /api/v1/profiles//$\{path}
+            - RewritePath=/api/v1/admin/profiles/search/(?<path>.*), /api/v1/profiles//$\{path}
   security:
     oauth2:
       client:
