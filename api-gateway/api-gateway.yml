@@ -5,6 +5,7 @@ security-constraints:
     - /actuator/**
     - /api/v1/*/api-doc
     - /api/v1/questions/**
+    - /api/v1/profile/profiles
     - /webjars/swagger-ui/**
     - /swagger-ui**
     - /v3/api-docs/**
