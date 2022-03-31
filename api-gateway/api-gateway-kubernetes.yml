@@ -26,7 +26,7 @@ spring:
         - id: profiles
           uri: http://profiles
           predicates:
-            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/profile/profiles
+            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/profile/profiles, /api/v1/experiencies/**, /api/v1/skills/**, /api/v1/languages/**
         - id: multimedia
           uri: http://multimedia-manager
           predicates:
