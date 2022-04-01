@@ -27,10 +27,6 @@ spring:
           uri: http://profiles
           predicates:
             - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/profile/profiles, /api/v1/experiences/**, /api/v1/skills/**, /api/v1/languages/**
-        - id: multimedia
-          uri: http://multimedia-manager
-          predicates:
-            - Path=/api/v1/multimedia, /api/v1/multimedia/**
         - id: openapi
           uri: http://api-gateway
           predicates:
@@ -46,6 +42,5 @@ spring:
               - iamai-admin
           filters:
             - RewritePath=/api/v1/admin/(?<path>.*), /api/v1//$\{path}
-#  todo set Keycloak prod url
 keycloak-client:
-  server-url: https://auth-dev.agenadev.com/auth
+  server-url: https://auth.vetathome.se/auth
