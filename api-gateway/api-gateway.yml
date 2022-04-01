@@ -4,17 +4,17 @@ security-constraints:
   open-uri:
     - /actuator/**
     - /api/v1/*/api-doc
-    - /api/v1/profiles
-    - /api/v1/profiles/**
-    - /api/v1/pets/**
-    - /api/v1/pets
     - /api/v1/questions/**
+    - /api/v1/profile/profiles
     - /webjars/swagger-ui/**
     - /swagger-ui**
     - /v3/api-docs/**
 spring:
   cloud:
     gateway:
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 5s
       forwarded:
         enabled: true
       x-forwarded:
@@ -29,22 +29,31 @@ spring:
         locator:
           enabled: false
       routes:
-        - id: userProfilesPrincipal
-          uri: http://localhost:8095
+        - id: profilesPrincipal
+          uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/profiles/me, /api/v1/profiles/me/pets, /api/v1/service/**
-            - Method=GET,PUT,POST,PATCH,DELETE
+            - Path=/api/v1/profiles/me
+            - Method=GET,PUT,PATCH,DELETE
           filters:
             - AddPrincipalToPathFilter
-        - id: petprofiles
-          uri: http://localhost:8095
+        - id: PublicSearch
+          uri: http://localhost:8080
           predicates:
-            - Path=/api/v1/pets, /api/v1/pets/**, /api/v1/petprofiles/**, /api/v1/profiles/**
-            - Method=GET,PUT,PATCH,DELETE
-        - id: questionnaire
-          uri: http://localhost:8096
+            - Path=/api/v1/profiles
+            - Query=projection, public-search-profile
+            - Query=isOpenForWork, true
+        - id: AdminSearch
+          uri: http://localhost:8081
           predicates:
-            - Path=/api/v1/questions/**, /api/v1/questionnaire/**
+            - Path=/api/v1/profiles
+            - Query=projection, admin-search-profile
+            - Query=isOpenForWork, true
+          filters:
+            - RewritePath=/api/v1/(?<path>.*), /api/v1/admin//$\{path}
+        - id: profiles
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/profiles/*/*, /api/v1/description/**, /api/v1/profiles/api-doc, /api/v1/profile/profiles
         - id: multimedia
           uri: http://localhost:8097
           predicates:
@@ -55,6 +64,15 @@ spring:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /api/v1//$\{path}/api-doc
+        - id: adminSearch2
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/admin/**
+          metadata:
+            auth-roles:
+              - iamai-admin
+          filters:
+            - RewritePath=/api/v1/admin/(?<path>.*), /api/v1//$\{path}
   security:
     oauth2:
       client:
@@ -78,7 +96,7 @@ spring:
           jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
 keycloak-client:
   server-url: https://auth-dev.agenadev.com/auth
-  realm: vet-at-home
+  realm: iamai
 management:
   endpoints:
     web:
@@ -87,6 +105,10 @@ management:
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
     reactor.netty.http.client: DEBUG
 springdoc:
   packagesToScan: com.agenatech
+health:
+  config:
+    enabled: false
