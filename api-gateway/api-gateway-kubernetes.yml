@@ -48,4 +48,4 @@ spring:
             - RewritePath=/api/v1/admin/(?<path>.*), /api/v1//$\{path}
 #  todo set Keycloak prod url
 keycloak-client:
-  server-url: https://auth-dev.agenadev.com/auth
+  server-url: https://auth.iamai.se/auth
