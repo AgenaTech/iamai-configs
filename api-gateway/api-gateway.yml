@@ -18,6 +18,7 @@ spring:
             allowedOrigins: "https://vet.agenadev.com/"
             allowedMethods:
               - GET,POST,PUT,PATCH,DELETE
+            allowedHeaders: "*"
       httpclient:
         connect-timeout: 3000
         response-timeout: 5s
