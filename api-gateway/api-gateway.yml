@@ -15,9 +15,9 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "https://vet.agenadev.com"
+            allowedOrigins: "*"
             allowedMethods:
-              - GET,POST,PUT,PATCH,DELETE
+              - GET,POST,PUT,PATCH,DELETE,OPTIONS
             allowedHeaders: "*"
       httpclient:
         connect-timeout: 3000
