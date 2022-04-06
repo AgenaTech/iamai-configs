@@ -32,7 +32,9 @@ spring:
         prefixEnabled: true
       default-filters:
         - TokenRelay
-        - AddResponseHeader=Access-Control-Allow-Origin, https://iamai.agenadev.com
+        - AddResponseHeader=Access-Control-Allow-Origin, *
+        - AddResponseHeader=Access-Control-Allow-Headers, *
+        - AddResponseHeader=Access-Control-Allow-Method, *
       discovery:
         locator:
           enabled: false
