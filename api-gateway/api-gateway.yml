@@ -15,7 +15,7 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "https://vet.agenadev.com/"
+            allowedOrigins: "https://vet.agenadev.com"
             allowedMethods:
               - GET,POST,PUT,PATCH,DELETE
             allowedHeaders: "*"
@@ -32,6 +32,7 @@ spring:
         prefixEnabled: true
       default-filters:
         - TokenRelay
+        - AddResponseHeader=Access-Control-Allow-Origin, https://vet.agenadev.com
       discovery:
         locator:
           enabled: false
