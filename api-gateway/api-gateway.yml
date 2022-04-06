@@ -25,6 +25,7 @@ spring:
         prefixEnabled: true
       default-filters:
         - TokenRelay
+        - AddResponseHeader=Access-Control-Allow-Origin, https://vetathome.se
       discovery:
         locator:
           enabled: false
