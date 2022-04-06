@@ -12,6 +12,12 @@ security-constraints:
 spring:
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "https://vet.agenadev.com/"
+            allowedMethods:
+              - GET,POST,PUT,PATCH,DELETE
       httpclient:
         connect-timeout: 3000
         response-timeout: 5s
