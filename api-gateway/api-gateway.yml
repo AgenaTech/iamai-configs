@@ -9,16 +9,15 @@ security-constraints:
     - /webjars/swagger-ui/**
     - /swagger-ui**
     - /v3/api-docs/**
+cors:
+  allowedOrigins: "*"
+  allowedMethods: "*"
+  allowedHeaders: "*"
+  allowedCredentials: true
+  maxAge: "3600"
 spring:
   cloud:
     gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET,POST,PUT,PATCH,DELETE,OPTIONS
-            allowedHeaders: "*"
       httpclient:
         connect-timeout: 3000
         response-timeout: 5s
@@ -32,9 +31,6 @@ spring:
         prefixEnabled: true
       default-filters:
         - TokenRelay
-        - AddResponseHeader=Access-Control-Allow-Origin, *
-        - AddResponseHeader=Access-Control-Allow-Headers, *
-        - AddResponseHeader=Access-Control-Allow-Method, *
       discovery:
         locator:
           enabled: false
