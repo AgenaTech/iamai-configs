@@ -8,7 +8,7 @@ amazon:
 springdoc.api-docs.path: /api/v1/multimedia/api-doc
 management.endpoints.web.exposure.include: '*'
 logging.level:
-  com.agenatech: DEBUG
+  com.agenatech: INFO
 health:
   config:
     enabled: false
