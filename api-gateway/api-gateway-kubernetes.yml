@@ -18,9 +18,9 @@ spring:
         - id: AdminSearch
           uri: http://api-gateway
           predicates:
-            - Path=/api/v1/profiles
+            - Path=/api/v1/profiles, /api/v1/profiles/*
             - Query=projection, admin-search-profile
-            - Query=isOpenForWork, true
+            - Method=GET
           filters:
             - RewritePath=/api/v1/(?<path>.*), /api/v1/admin//$\{path}
         - id: profiles
