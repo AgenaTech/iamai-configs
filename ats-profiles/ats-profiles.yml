@@ -11,7 +11,7 @@ spring:
       hibernate:
         generate_statistics: false
         cache:
-          use_second_level_cache: true
+          use_second_level_cache: false
           region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
           queries: true
           ehcache:
